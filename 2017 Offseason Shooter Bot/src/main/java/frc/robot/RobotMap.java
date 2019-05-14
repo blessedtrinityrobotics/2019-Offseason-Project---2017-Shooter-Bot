@@ -17,31 +17,40 @@ public class RobotMap {
   
   // Motor Ports
     // Left Drive Train GB Motors
-    public static int leftMasterMotorPort = 2;
-    public static int  leftSlaveMotor1Port = 3;
-    public static int  leftSlaveMotor2Port = 4;
+    public static final int leftMasterMotorPort = 2;
+    public static final int  leftSlaveMotor1Port = 3;
+    public static final int  leftSlaveMotor2Port = 4;
     // Right Drive Train GB Motors
-    public static int  rightMasterMotorPort = 5;
-    public static int  rightSlaveMotor1Port = 6;
-    public static int  rightSlaveMotor2Port = 7;
+    public static final int  rightMasterMotorPort = 5;
+    public static final int  rightSlaveMotor1Port = 6;
+    public static final int  rightSlaveMotor2Port = 7;
     // Intake Motors
-    public static int  leftIntakeMotorPort = 8;
-    public static int  rightIntakeMotorPort = 9;
+    public static final int  leftIntakeMotorPort = 8;
+    public static final int  rightIntakeMotorPort = 9;
     // Hopper Motors
-    public static int   frontHopperMotorPort = 10;
-    public static int   backHopperMotorPort = 11;
+    public static final int   frontHopperMotorPort = 10;
+    public static final int   backHopperMotorPort = 11;
     // Shooter Motors
-    public static int   shooterMasterMotorPort = 12;
-    public static int   shooterSlaveMotorPort = 13;
+    public static final int   shooterMasterMotorPort = 12;
+    public static final int   shooterSlaveMotorPort = 13;
   //End of Motor Ports
 
-  // Joysick Ports
-    public static int driveJoyPort = 0;
-    public static int operatorJoyPort = 1;
+  // XboxController Ports
+    public static final int driveControllerPort = 0;
+    public static final int operatorControllerPort = 1;
   //End of Joystick Ports
 
   //Constants
-    public static int wheelDiameter = 4;
+    public static final int wheelDiameter = 4;
   //End of Constants
-  
+
+  //Axis
+  public static final int leftStickY = 1;
+  public static final int rightStickY = 5;
+  //End of Axis
+
+  //Buttons
+  public static final int xButton = 3;
+  //End of Buttons
+	
 }
