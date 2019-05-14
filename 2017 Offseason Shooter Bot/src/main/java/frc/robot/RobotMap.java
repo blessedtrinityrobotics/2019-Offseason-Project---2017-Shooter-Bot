@@ -15,26 +15,30 @@ package frc.robot;
  */
 public class RobotMap {
   
-  //Motor Ports
-  public static final int
-    placeholder = 69,
-    //Left Drive Train GB Motors 
-    leftMasterMotor = 2,
-    leftSlaveMotor1 = 3,
-    leftSlaveMotor2 = 4,
-    //Right Drive Train GB Motors
-    rightMasterMotor = 5,
-    rightSlaveMotor1 = 6,
-    rightSlaveMotor2 = 7,
-    //Left Intake Motor
-    leftIntakeMotor = 8,
-    //Right Intake Motor
-    rightIntakeMotor = 9,
-    //Front Hopper Motor
-    frontHopperMotor = 10,
-    //Back Hopper Motor
-    backHopperMotor = 11,
-    //Shooter Motors
-    shooterMasterMotor = 12,
-    shooterSlaveMotor = 13;
+  // Motor Ports
+    // Left Drive Train GB Motors
+    public static int leftMasterMotor = 2;
+    public static int  leftSlaveMotor1 = 3;
+    public static int  leftSlaveMotor2 = 4;
+    // Right Drive Train GB Motors
+    public static int  rightMasterMotor = 5;
+    public static int  rightSlaveMotor1 = 6;
+    public static int  rightSlaveMotor2 = 7;
+    // Intake Motors
+    public static int  leftIntakeMotor = 8;
+    public static int  rightIntakeMotor = 9;
+    // Hopper Motors
+    public static int   frontHopperMotor = 10;
+    public static int   backHopperMotor = 11;
+    // Shooter Motors
+    public static int   shooterMasterMotor = 12;
+    public static int   shooterSlaveMotor = 13;
+  //End of Motor Ports
+
+  // Joysick Ports
+    public static int driveJoyPort = 0;
+    public static int operatorJoyPort = 1;
+  //End of Joystick Ports
+
+  
 }
