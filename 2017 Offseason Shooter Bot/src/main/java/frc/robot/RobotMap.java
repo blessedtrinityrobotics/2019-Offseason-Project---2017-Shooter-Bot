@@ -40,5 +40,8 @@ public class RobotMap {
     public static int operatorJoyPort = 1;
   //End of Joystick Ports
 
+  //Constants
+    public static int wheelDiameter = 4;
+  //End of Constants
   
 }
