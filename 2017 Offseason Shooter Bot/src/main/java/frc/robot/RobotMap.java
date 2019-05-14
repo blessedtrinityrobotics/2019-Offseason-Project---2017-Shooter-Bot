@@ -17,22 +17,22 @@ public class RobotMap {
   
   // Motor Ports
     // Left Drive Train GB Motors
-    public static int leftMasterMotor = 2;
-    public static int  leftSlaveMotor1 = 3;
-    public static int  leftSlaveMotor2 = 4;
+    public static int leftMasterMotorPort = 2;
+    public static int  leftSlaveMotor1Port = 3;
+    public static int  leftSlaveMotor2Port = 4;
     // Right Drive Train GB Motors
-    public static int  rightMasterMotor = 5;
-    public static int  rightSlaveMotor1 = 6;
-    public static int  rightSlaveMotor2 = 7;
+    public static int  rightMasterMotorPort = 5;
+    public static int  rightSlaveMotor1Port = 6;
+    public static int  rightSlaveMotor2Port = 7;
     // Intake Motors
-    public static int  leftIntakeMotor = 8;
-    public static int  rightIntakeMotor = 9;
+    public static int  leftIntakeMotorPort = 8;
+    public static int  rightIntakeMotorPort = 9;
     // Hopper Motors
-    public static int   frontHopperMotor = 10;
-    public static int   backHopperMotor = 11;
+    public static int   frontHopperMotorPort = 10;
+    public static int   backHopperMotorPort = 11;
     // Shooter Motors
-    public static int   shooterMasterMotor = 12;
-    public static int   shooterSlaveMotor = 13;
+    public static int   shooterMasterMotorPort = 12;
+    public static int   shooterSlaveMotorPort = 13;
   //End of Motor Ports
 
   // Joysick Ports
