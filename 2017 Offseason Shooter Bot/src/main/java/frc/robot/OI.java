@@ -18,9 +18,34 @@ import frc.robot.commands.MoveToPos;
  */
 public class OI {
 
+  // Starts Xbox Controllers
   private XboxController driverController = new XboxController(RobotMap.driveControllerPort);
   private XboxController operatorController = new XboxController(RobotMap.operatorControllerPort);
-  Button xButton = new JoystickButton(driverController, RobotMap.xButton);
+
+  // Starts Driver Buttons
+  Button xButtonDriver             = new JoystickButton(driverController, RobotMap.xButton);
+  Button aButtonDriver             = new JoystickButton(driverController, RobotMap.aButton);
+  Button bButtonDriver             = new JoystickButton(driverController, RobotMap.bButton);
+  Button yButtonDriver             = new JoystickButton(driverController, RobotMap.yButton);
+  Button backButtonDriver          = new JoystickButton(driverController, RobotMap.backButton);
+  Button startButtonDriver         = new JoystickButton(driverController, RobotMap.startButton);
+  Button leftBumperButtonDriver    = new JoystickButton(driverController, RobotMap.leftBumperButton);
+  Button rightBumperButtonDriver   = new JoystickButton(driverController, RobotMap.rightBumperButton);
+  Button leftStickButtonDriver     = new JoystickButton(driverController, RobotMap.leftStickButton);
+  Button rightStickButtonDriver    = new JoystickButton(driverController, RobotMap.rightStickButton);
+
+  // Starts Operator Buttons
+  Button xButtonOperator           = new JoystickButton(operatorController, RobotMap.xButton);
+  Button aButtonOperator           = new JoystickButton(operatorController, RobotMap.aButton);
+  Button bButtonOperator           = new JoystickButton(operatorController, RobotMap.bButton);
+  Button yButtonOperator           = new JoystickButton(operatorController, RobotMap.yButton);
+  Button backButtonOperator        = new JoystickButton(operatorController, RobotMap.backButton);
+  Button startButtonOperator       = new JoystickButton(operatorController, RobotMap.startButton);
+  Button leftBumperButtonOperator  = new JoystickButton(operatorController, RobotMap.leftBumperButton);
+  Button rightBumperButtonOperator = new JoystickButton(operatorController, RobotMap.rightBumperButton);
+  Button leftStickButtonOperator   = new JoystickButton(operatorController, RobotMap.leftStickButton);
+  Button rightStickButtonOperator  = new JoystickButton(operatorController, RobotMap.rightStickButton);
+
 
   public double getDriverRawAxis(int axis) {
     return driverController.getRawAxis(axis);
@@ -31,7 +56,7 @@ public class OI {
   }
 
   public OI() {
-    xButton.whenPressed(new MoveToPos(1000));
+    xButtonDriver.whenPressed(new MoveToPos(10)); // Moves 10 inches forwards
   }
   
 }

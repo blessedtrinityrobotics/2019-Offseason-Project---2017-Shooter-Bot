@@ -17,7 +17,7 @@ public class RobotMap {
   
   // Motor Ports
     // Left Drive Train GB Motors
-    public static final int leftMasterMotorPort = 2;
+    public static final int  leftMasterMotorPort = 2;
     public static final int  leftSlaveMotor1Port = 3;
     public static final int  leftSlaveMotor2Port = 4;
     // Right Drive Train GB Motors
@@ -25,33 +25,43 @@ public class RobotMap {
     public static final int  rightSlaveMotor1Port = 6;
     public static final int  rightSlaveMotor2Port = 7;
     // Intake Motors
-    public static final int  leftIntakeMotorPort = 8;
+    public static final int  leftIntakeMotorPort  = 8;
     public static final int  rightIntakeMotorPort = 9;
     // Hopper Motors
     public static final int   frontHopperMotorPort = 10;
-    public static final int   backHopperMotorPort = 11;
+    public static final int   backHopperMotorPort  = 11;
     // Shooter Motors
     public static final int   shooterMasterMotorPort = 12;
-    public static final int   shooterSlaveMotorPort = 13;
+    public static final int   shooterSlaveMotorPort  = 13;
   //End of Motor Ports
 
   // XboxController Ports
-    public static final int driveControllerPort = 0;
+    public static final int driveControllerPort    = 0;
     public static final int operatorControllerPort = 1;
   //End of Joystick Ports
 
   //Constants
     public static final int wheelDiameter = 4;
-    public static final int unitsPerRotation = 4096;
+    public static final int PPR           = 4096;
+    public static final double PPI        = (PPR)/(2*Math.PI*(wheelDiameter/2));
   //End of Constants
 
   //Axis
-  public static final int leftStickY = 1;
-  public static final int rightStickY = 5;
+    public static final int leftStickY  = 1;
+    public static final int rightStickY = 5;
   //End of Axis
 
   //Buttons
-  public static final int xButton = 3;
+    public static final int aButton           = 1;
+    public static final int bButton           = 2;
+    public static final int xButton           = 3;
+    public static final int yButton           = 4;
+    public static final int leftBumperButton  = 5;
+    public static final int rightBumperButton = 6;
+    public static final int backButton        = 7;
+    public static final int startButton       = 8;
+    public static final int leftStickButton   = 9;
+    public static final int rightStickButton  = 10;
   //End of Buttons
 
 	

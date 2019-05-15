@@ -14,14 +14,12 @@ public class MoveToPos extends Command {
   double targetPosition;
   public MoveToPos(double position) {
     targetPosition=position;
-    // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -34,7 +32,7 @@ public class MoveToPos extends Command {
   @Override
   protected boolean isFinished() {
     double currentPosition = Robot.driveTrain.getAvgCurrentPosition();
-    if((currentPosition > targetPosition - 100) && (currentPosition < targetPosition + 100)) {
+    if((currentPosition > targetPosition - 100 /* Min */ ) && (currentPosition < targetPosition + 100 /* Max */ )) {
       return true;
     } else {
       return false;
@@ -44,8 +42,7 @@ public class MoveToPos extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.setLeftMotors(0);
-    Robot.driveTrain.setRightMotors(0);
+    Robot.driveTrain.moveToPos(targetPosition);
   }
 
 
@@ -53,6 +50,7 @@ public class MoveToPos extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    this.end();
+    Robot.driveTrain.setLeftMotors(0);
+    Robot.driveTrain.setRightMotors(0);
   }
 }

@@ -25,14 +25,16 @@ public class DriveTrain_Subsystem extends Subsystem {
 
 
   // Starts Drive Train GB Motors
-  public TalonSRX leftMasterMotor = new TalonSRX(RobotMap.leftMasterMotorPort);
-  public VictorSPX leftSlaveMotor1 = new VictorSPX(RobotMap.leftSlaveMotor1Port);
-  public VictorSPX leftSlaveMotor2 = new VictorSPX(RobotMap.leftSlaveMotor2Port);
-  public TalonSRX rightMasterMotor = new TalonSRX(RobotMap.rightMasterMotorPort);
+  public TalonSRX leftMasterMotor   = new TalonSRX(RobotMap.leftMasterMotorPort);
+  public VictorSPX leftSlaveMotor1  = new VictorSPX(RobotMap.leftSlaveMotor1Port);
+  public VictorSPX leftSlaveMotor2  = new VictorSPX(RobotMap.leftSlaveMotor2Port);
+  public TalonSRX rightMasterMotor  = new TalonSRX(RobotMap.rightMasterMotorPort);
   public VictorSPX rightSlaveMotor1 = new VictorSPX(RobotMap.rightSlaveMotor1Port);
   public VictorSPX rightSlaveMotor2 = new VictorSPX(RobotMap.rightSlaveMotor2Port);
 
   public DriveTrain_Subsystem() {
+
+    // Configure Left GB Motors
     leftMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY);
     leftMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs);
     leftMasterMotor.config_kI(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kI, PIDConstants.kTimeoutMs);
@@ -47,6 +49,7 @@ public class DriveTrain_Subsystem extends Subsystem {
     leftSlaveMotor1.setNeutralMode(NeutralMode.Coast);
     leftSlaveMotor2.setNeutralMode(NeutralMode.Coast);
 
+    // Configure Right GB Motors
     rightMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY);
     rightMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs);
     rightMasterMotor.config_kI(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kI, PIDConstants.kTimeoutMs);
@@ -60,8 +63,6 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightMasterMotor.setNeutralMode(NeutralMode.Coast);
     rightSlaveMotor1.setNeutralMode(NeutralMode.Coast);
     rightSlaveMotor2.setNeutralMode(NeutralMode.Coast);
-    
-
 
   }
   @Override
@@ -82,11 +83,18 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightSlaveMotor2.follow(rightMasterMotor);
   }
 
-  public void moveToPos(double pos){
-    leftMasterMotor.set(ControlMode.MotionMagic, -pos);
+  /**
+   * 
+   * @param distance Inches to move forward or backwards
+   * 
+   */
+  public void moveToPos(double distance){
+    double encoderTarget;
+    encoderTarget = distance * RobotMap.PPI;
+    leftMasterMotor.set(ControlMode.MotionMagic, -encoderTarget);
     leftSlaveMotor1.follow(leftMasterMotor);
     leftSlaveMotor2.follow(leftMasterMotor);
-    rightMasterMotor.set(ControlMode.MotionMagic, pos);
+    rightMasterMotor.set(ControlMode.MotionMagic, encoderTarget);
     rightSlaveMotor1.follow(rightMasterMotor);
     rightSlaveMotor2.follow(rightMasterMotor);
   }
