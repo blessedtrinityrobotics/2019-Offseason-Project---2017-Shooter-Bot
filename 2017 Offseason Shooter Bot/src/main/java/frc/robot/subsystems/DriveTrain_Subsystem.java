@@ -14,6 +14,8 @@ import frc.robot.commands.TankDrive;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
@@ -38,6 +40,12 @@ public class DriveTrain_Subsystem extends Subsystem {
     leftMasterMotor.config_kF(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kF, PIDConstants.kTimeoutMs);
     leftMasterMotor.configMotionAcceleration(PIDConstants.kDriveTrainAccel, PIDConstants.kTimeoutMs);
     leftMasterMotor.configMotionCruiseVelocity(PIDConstants.kDriveTrainVelocity, PIDConstants.kTimeoutMs);
+    leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs);
+    leftMasterMotor.setSensorPhase(true);
+    leftMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs);
+    leftMasterMotor.setNeutralMode(NeutralMode.Coast);
+    leftSlaveMotor1.setNeutralMode(NeutralMode.Coast);
+    leftSlaveMotor2.setNeutralMode(NeutralMode.Coast);
 
     rightMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY);
     rightMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs);
@@ -46,6 +54,15 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightMasterMotor.config_kF(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kF, PIDConstants.kTimeoutMs);
     rightMasterMotor.configMotionAcceleration(PIDConstants.kDriveTrainAccel, PIDConstants.kTimeoutMs);
     rightMasterMotor.configMotionCruiseVelocity(PIDConstants.kDriveTrainVelocity, PIDConstants.kTimeoutMs);
+    rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs);
+    rightMasterMotor.setSensorPhase(false);
+    rightMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs);
+    rightMasterMotor.setNeutralMode(NeutralMode.Coast);
+    rightSlaveMotor1.setNeutralMode(NeutralMode.Coast);
+    rightSlaveMotor2.setNeutralMode(NeutralMode.Coast);
+    
+
+
   }
   @Override
   public void initDefaultCommand() {

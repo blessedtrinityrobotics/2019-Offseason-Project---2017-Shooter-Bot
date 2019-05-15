@@ -42,6 +42,7 @@ public class RobotMap {
 
   //Constants
     public static final int wheelDiameter = 4;
+    public static final int unitsPerRotation = 4096;
   //End of Constants
 
   //Axis
@@ -52,5 +53,6 @@ public class RobotMap {
   //Buttons
   public static final int xButton = 3;
   //End of Buttons
+
 	
 }
