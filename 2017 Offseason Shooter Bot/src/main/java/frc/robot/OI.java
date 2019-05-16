@@ -56,7 +56,15 @@ public class OI {
   }
 
   public OI() {
-    xButtonDriver.whenPressed(new MoveToPos(10)); // Moves 10 inches forwards
+
+    // Starts Commands
+    xButtonDriver.whenPressed(new MoveToPos( 10)); // Moves 10 inches forwards
+    aButtonDriver.whenPressed(new MoveToPos(-10)); // Moves 10 inches backwards
+    /*
+    // Cancels Commands
+    xButtonDriver.cancelWhenPressed(new MoveToPos(-10));
+    aButtonDriver.cancelWhenPressed(new MoveToPos( 10));
+    */
   }
   
 }
