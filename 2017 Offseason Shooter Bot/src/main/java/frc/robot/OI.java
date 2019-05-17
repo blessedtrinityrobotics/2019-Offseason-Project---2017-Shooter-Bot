@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.MoveToPos;
+import frc.robot.commands.IntakeBalls;
+import frc.robot.commands.FeedBalls;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
