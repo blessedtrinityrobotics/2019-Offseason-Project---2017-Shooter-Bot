@@ -14,6 +14,10 @@ public class PIDConstants {
     public final static int kDriveTrainSensorVel = 1000;
     public final static int kDriveTrainAccel = kDriveTrainSensorVel/2;
     public final static int kDriveTrainVelocity = kDriveTrainSensorVel/2;
+	
+    //Shooter Constants
+    public final static int kShooterSensorVel = 1000;
+
 
 	/**
 	 * PID Gains may have to be adjusted based on the responsiveness of control loop.
@@ -22,6 +26,8 @@ public class PIDConstants {
      * 
 	 * 	                                    	       kP   kI   kD   kF                          Iz   PeakOut */
 	public final static Gains kGains_Drive = new Gains( 0.0, 0.0,  0.0, 0.0, 100,  0.50 );
+	public final static Gains kGains_Shoot = new Gains( 0.0, 0.0,  0.0, 0.0, 100,  0.50 );
+	
 
 
 	
@@ -34,5 +40,7 @@ public class PIDConstants {
 	public final static int PID_TURN = 1;
 	/* ---- Named slots, used to clarify code ---- */
 	public final static int kSlot_Drive = 0;
+	public final static int kSlot_Shoot = 1;
+
 
 }
