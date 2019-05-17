@@ -60,6 +60,10 @@ public class OI {
     // Starts Commands
     xButtonDriver.whenPressed(new MoveToPos( 10)); // Moves 10 inches forwards
     aButtonDriver.whenPressed(new MoveToPos(-10)); // Moves 10 inches backwards
+    
+    leftBumperButtonOperator.whenPressed(new IntakeBalls()); // Intake Balls
+    rightBumperButtonOperator.whenPressed(new FeedBalls()); // Feed Balls
+    
     /*
     // Cancels Commands
     xButtonDriver.cancelWhenPressed(new MoveToPos(-10));
