@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.PIDConstants;
 import frc.robot.RobotMap;
 import frc.robot.commands.IntakeBalls;
 
@@ -23,7 +22,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class Intake extends Subsystem {
    
   public VictorSPX leftIntakeMotor = new VictorSPX(RobotMap.leftIntakeMotorPort);
-  public VictorSPx rightIntakeMotor = new VictorSPX(RobotMap.rightIntakeMotorPort);
+  public VictorSPX rightIntakeMotor = new VictorSPX(RobotMap.rightIntakeMotorPort);
   
   public Intake() {
     // Configure Intake Motors

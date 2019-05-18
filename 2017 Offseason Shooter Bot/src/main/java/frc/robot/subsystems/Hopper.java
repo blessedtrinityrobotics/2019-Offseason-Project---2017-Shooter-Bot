@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.PIDConstants;
 import frc.robot.RobotMap;
 import frc.robot.commands.FeedBalls;
 
@@ -23,7 +22,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class Hopper extends Subsystem {
    
   public VictorSPX frontHopperMotor = new VictorSPX(RobotMap.frontHopperMotorPort);
-  public VictorSPx backHopperMotor = new VictorSPX(RobotMap.backHopperMotorPort);
+  public VictorSPX backHopperMotor = new VictorSPX(RobotMap.backHopperMotorPort);
   
   public Hopper() {
     // Configure Intake Motors
