@@ -41,10 +41,13 @@ public class RobotMap {
   //End of Joystick Ports
 
   //Constants
-    public static final int wheelDiameter = 4;
-    public static final int PPR           = 4096;
-    public static final double PPI        = (PPR)/(2*Math.PI*(wheelDiameter/2));
-    public static final double turningPower = 0.5;
+    public static final int wheelDiameter   = 4;    // Wheel Diameter
+    public static final int PPR             = 4096; // Pulse Per Revolution (SRX Mag Encoder)
+    public static final double PPI          = (PPR)/(2*Math.PI*(wheelDiameter/2)); // Pulse Per Inch
+    public static final double turningPower = 0.5;  // Turning Power for Drive (%)
+    public static final double RPM          = 4000; // Shooter Speed (RPM)
+    public static final double HopperSpeed  = 0.75; // Hopper Speed (Volts)
+    public static final double IntakeSpeed  = 1.0;  // Intake Speed (Volts)
   //End of Constants
 
   //Axis
@@ -68,8 +71,6 @@ public class RobotMap {
     public static final int leftStickButton   = 9;
     public static final int rightStickButton  = 10;
   //End of Buttons
-	
 
 
-	
 }

@@ -53,7 +53,7 @@ public class Shooter extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new Shoot());
+    setDefaultCommand(new Shoot(RobotMap.RPM));
   }
 
   public void setShooterSpeed(double speed) {
@@ -67,20 +67,9 @@ public class Shooter extends Subsystem {
    * @param RPM RPM to spin Shooter to. Velocity Control Loop
    * 
    */
-  public void spinShooterToTargetRMP(double RPM){
+  public void spinShooterToTargetRPM(double RPM){
     shooterMasterMotor.set(ControlMode.Velocity, RPM);
     shooterSlaveMotor.follow(shooterMasterMotor);
   }
-  
-  /**
-   * 
-   * @param RPM RPM to spin Shooter to. kF Control Loop
-   * 
-   */
-  public void shooterKfControl(double RPM){
-     
-  }
-  
-
 
 }

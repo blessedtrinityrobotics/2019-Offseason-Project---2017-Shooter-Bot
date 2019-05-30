@@ -10,11 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Shoot extends Command {
-  double targetRPM;
-  public Shoot(double RPM) {
-    targetRPM = RPM;
-    requires(Robot.shooter);
+public class DriveStraightToAngle extends Command {
+  int targetAngle;
+  double targetDirection;
+  public DriveStraightToAngle(int angle, double direction) {
+    targetAngle = angle;
+    targetDirection = direction;
+    requires(Robot.driveTrain);
   }
 
   // Called just before this Command runs the first time
@@ -25,25 +27,27 @@ public class Shoot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooter.spinShooterToTargetRPM(targetRPM);
+    Robot.driveTrain.driveStraight(targetAngle, targetDirection);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+   return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.shooter.setShooterSpeed(0.0);
+    Robot.driveTrain.setLeftMotors(0);
+    Robot.driveTrain.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    this.end();
+    Robot.driveTrain.setLeftMotors(0);
+    Robot.driveTrain.setRightMotors(0);
   }
 }

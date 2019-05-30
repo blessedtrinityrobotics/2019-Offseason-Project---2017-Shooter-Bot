@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.MoveToPos;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.FeedBalls;
+import frc.robot.commands.Shoot;
+import frc.robot.commands.DriveStraightToAngle;
+import frc.robot.commands.ResetGyro;
+import frc.robot.commands.ToggleLED;;
+
 
 
 /**
@@ -63,9 +68,17 @@ public class OI {
     // Starts Commands
     xButtonDriver.whenPressed(new MoveToPos( 10)); // Moves 10 inches forwards
     aButtonDriver.whenPressed(new MoveToPos(-10)); // Moves 10 inches backwards
+    leftBumperButtonDriver.whenPressed(new ResetGyro());   // Reset Gyro to 0
+    leftBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, 1.0)); // Drive Straight using PID Control
+    rightBumperButtonDriver.whenPressed(new ResetGyro());   // Reset Gyro to 0
+    rightBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, -1.0)); // Drive Backwards using PID Control
+    startButtonDriver.whenPressed(new ToggleLED());
     
-    leftBumperButtonOperator.whenPressed(new IntakeBalls()); // Intake Balls
-    rightBumperButtonOperator.whenPressed(new FeedBalls()); // Feed Balls
+    leftBumperButtonOperator.whileHeld(new IntakeBalls()); // Intake Balls
+    rightBumperButtonOperator.whileHeld(new FeedBalls());  // Feed Balls
+    xButtonOperator.whileHeld(new Shoot(RobotMap.RPM));
+    
+
     
     /*
     // Cancels Commands
