@@ -24,7 +24,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class Shooter extends Subsystem {
 
 
-  // Starts Drive Train GB Motors
+  // Starts Shooter Motors
   public TalonSRX shooterMasterMotor   = new TalonSRX(RobotMap.shooterMasterMotorPort);
   public VictorSPX shooterSlaveMotor  = new VictorSPX(RobotMap.shooterSlaveMotorPort);
  
