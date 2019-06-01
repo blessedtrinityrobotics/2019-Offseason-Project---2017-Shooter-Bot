@@ -32,22 +32,22 @@ public class Shooter extends Subsystem {
   public Shooter() {
 
     // Configure Master Shooter Motor
-    shooterMasterMotor.setInverted(false);
-    shooterMasterMotor.selectProfileSlot(PIDConstants.kSlot_Shoot, PIDConstants.PID_PRIMARY);
-    shooterMasterMotor.config_kP(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kP, PIDConstants.kTimeoutMs);
-    shooterMasterMotor.config_kI(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kI, PIDConstants.kTimeoutMs);
-    shooterMasterMotor.config_kD(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kD, PIDConstants.kTimeoutMs);
-    shooterMasterMotor.config_kF(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kF, PIDConstants.kTimeoutMs);
-    shooterMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs);
-    shooterMasterMotor.setSensorPhase(false);
-    shooterMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs);
-    shooterMasterMotor.setNeutralMode(NeutralMode.Coast);
-
+    shooterMasterMotor.setInverted(false); // !Reverse Direction of Motor
+    shooterMasterMotor.selectProfileSlot(PIDConstants.kSlot_Shoot, PIDConstants.PID_PRIMARY); // Profile Slot for PID Values
+    shooterMasterMotor.config_kP(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kP, PIDConstants.kTimeoutMs); // P Value
+    shooterMasterMotor.config_kI(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kI, PIDConstants.kTimeoutMs); // I Value
+    shooterMasterMotor.config_kD(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kD, PIDConstants.kTimeoutMs); // D Value
+    shooterMasterMotor.config_kF(PIDConstants.kSlot_Shoot, PIDConstants.kGains_Shoot.kF, PIDConstants.kTimeoutMs); // F Value
+    shooterMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs); // Select Sensor (Encoder)
+    shooterMasterMotor.setSensorPhase(false); // !Reverse Direction of encoder
+    shooterMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs); // % Ramp - 1 sec to full throtle
+    shooterMasterMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+ 
     // Configure Slave Shooter Motor
-    shooterSlaveMotor.setInverted(false);
-    shooterSlaveMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs);
-    shooterSlaveMotor.setNeutralMode(NeutralMode.Coast);
-
+    shooterSlaveMotor.setInverted(false); // !Reverse Direction of Motor
+    shooterSlaveMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs); // % Ramp - 1 sec to full throtle
+    shooterSlaveMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+ 
   }
   
   @Override
@@ -56,6 +56,7 @@ public class Shooter extends Subsystem {
     setDefaultCommand(new Shoot(RobotMap.RPM));
   }
 
+  // Set Shooter Motors Speed
   public void setShooterSpeed(double speed) {
     shooterMasterMotor.set(ControlMode.PercentOutput, speed);
     shooterSlaveMotor.follow(shooterMasterMotor);
@@ -64,7 +65,7 @@ public class Shooter extends Subsystem {
   
   /**
    * 
-   * @param RPM RPM to spin Shooter to. Velocity Control Loop
+   * @param RPM RPM to spin Shooter to; Velocity Control Loop
    * 
    */
   public void spinShooterToTargetRPM(double RPM){

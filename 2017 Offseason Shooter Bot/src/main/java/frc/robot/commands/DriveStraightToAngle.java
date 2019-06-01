@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DriveStraightToAngle extends Command {
-  int targetAngle;
+  double targetAngle;
   double targetDirection;
-  public DriveStraightToAngle(int angle, double direction) {
+  public DriveStraightToAngle(double angle, double direction) {
     targetAngle = angle;
     targetDirection = direction;
     requires(Robot.driveTrain);

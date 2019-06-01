@@ -20,16 +20,17 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  * Add your docs here.
  */
 public class Hopper extends Subsystem {
-   
+  
+  // Starts Hopper Motors
   public VictorSPX frontHopperMotor = new VictorSPX(RobotMap.frontHopperMotorPort);
   public VictorSPX backHopperMotor = new VictorSPX(RobotMap.backHopperMotorPort);
   
   public Hopper() {
-    // Configure Intake Motors
+    // Configure Hopper Motors
     frontHopperMotor.setInverted(true); // Reverse direction
-    frontHopperMotor.setNeutralMode(NeutralMode.Brake);
-    backHopperMotor.setInverted(false);
-    backHopperMotor.setNeutralMode(NeutralMode.Brake);
+    frontHopperMotor.setNeutralMode(NeutralMode.Brake); // Neutral Mode - Brake
+    backHopperMotor.setInverted(false); // !Reverse direction 
+    backHopperMotor.setNeutralMode(NeutralMode.Brake); // Neutral Mode - Brake
   }
   
   @Override
@@ -38,6 +39,7 @@ public class Hopper extends Subsystem {
     setDefaultCommand(new FeedBalls());
   }
   
+  // Set Hopper Motors Speed
   public void setHopperSpeed(double speed) {
     frontHopperMotor.set(ControlMode.PercentOutput, speed);
     backHopperMotor.set(ControlMode.PercentOutput, speed);

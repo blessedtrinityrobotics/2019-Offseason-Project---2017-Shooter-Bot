@@ -25,14 +25,14 @@ public class Drive extends Command {
   @Override
   protected void execute() {
     //Get All Axis Values
-    double leftStickY = Robot.m_oi.getDriverRawAxis(RobotMap.leftStickY);
+    //double leftStickY = Robot.m_oi.getDriverRawAxis(RobotMap.leftStickY);
     double rightStickY = Robot.m_oi.getDriverRawAxis(RobotMap.rightStickY);
     double leftStickX = Robot.m_oi.getDriverRawAxis(RobotMap.leftStickX);
     //double rightStickX = Robot.m_oi.getDriverRawAxis(RobotMap.rightStickX);
-    double leftTrigger = Robot.m_oi.getDriverRawAxis(RobotMap.leftTriggerAxis);
-    double rightTrigger = Robot.m_oi.getDriverRawAxis(RobotMap.rightTriggerAxis);
+    //double leftTrigger = Robot.m_oi.getDriverRawAxis(RobotMap.leftTriggerAxis);
+    //double rightTrigger = Robot.m_oi.getDriverRawAxis(RobotMap.rightTriggerAxis);
     
-
+  /*
     // Tank Drive Options
       // Regular Tank Drive
       Robot.driveTrain.setLeftMotors(leftStickY);
@@ -40,18 +40,20 @@ public class Drive extends Command {
       // Exponential Tank Drive
       Robot.driveTrain.setLeftMotors(leftStickY * Math.abs(leftStickY));
       Robot.driveTrain.setRightMotors(rightStickY * Math.abs(rightStickY));
-
+  */
     // Split Arcade Drive Options  
       // Regular Split Arcade
       Robot.driveTrain.setLeftMotors(rightStickY + leftStickX * RobotMap.turningPower);
       Robot.driveTrain.setRightMotors(rightStickY - leftStickX * RobotMap.turningPower);
+    /*
       // Exponential Drive Split Arcade
       Robot.driveTrain.setLeftMotors((rightStickY * Math.abs(rightStickY)) + (leftStickX * RobotMap.turningPower));
       Robot.driveTrain.setRightMotors((rightStickY * Math.abs(rightStickY)) - (leftStickX * RobotMap.turningPower));
       // Exponential Drive and Turn Split Arcade 
       Robot.driveTrain.setLeftMotors((rightStickY * Math.abs(rightStickY)) + ((leftStickX * Math.abs(leftStickX)) * RobotMap.turningPower));
       Robot.driveTrain.setRightMotors((rightStickY * Math.abs(rightStickY)) - ((leftStickX * Math.abs(leftStickX)) * RobotMap.turningPower));
-
+    */
+  /*
     // GTA Drive Options
       // Regular GTA Drive
       double triggerValue1 = rightTrigger - leftTrigger;
@@ -68,7 +70,7 @@ public class Drive extends Command {
       double turnValue3 = (leftStickX * Math.abs(leftStickX)) * RobotMap.turningPower;
       Robot.driveTrain.setLeftMotors(triggerValue3 + turnValue3);
       Robot.driveTrain.setRightMotors(triggerValue3 - turnValue3);
-  
+  */
   }
 
   // Make this return true when this Command no longer needs to run execute()

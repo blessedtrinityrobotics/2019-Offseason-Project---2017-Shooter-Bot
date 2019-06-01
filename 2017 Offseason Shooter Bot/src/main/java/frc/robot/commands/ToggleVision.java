@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ToggleLED extends Command {
-  public ToggleLED() {
+public class ToggleVision extends Command {
+  public ToggleVision() {
     requires(Robot.driveTrain);
   }
 
@@ -23,7 +23,7 @@ public class ToggleLED extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.toggleGreenLEDS();
+    Robot.driveTrain.toggleVision();
   }
 
   // Make this return true when this Command no longer needs to run execute()

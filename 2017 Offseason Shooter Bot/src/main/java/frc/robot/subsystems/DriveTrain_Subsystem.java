@@ -22,11 +22,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 
-/**
- * Add your docs here.
- */
-public class DriveTrain_Subsystem extends Subsystem {
 
+public class DriveTrain_Subsystem extends Subsystem {
 
   // Starts Drive Train GB Motors
   public TalonSRX leftMasterMotor   = new TalonSRX(RobotMap.leftMasterMotorPort);
@@ -35,45 +32,47 @@ public class DriveTrain_Subsystem extends Subsystem {
   public TalonSRX rightMasterMotor  = new TalonSRX(RobotMap.rightMasterMotorPort);
   public VictorSPX rightSlaveMotor1 = new VictorSPX(RobotMap.rightSlaveMotor1Port);
   public VictorSPX rightSlaveMotor2 = new VictorSPX(RobotMap.rightSlaveMotor2Port);
-  public ADXRS450_Gyro onboardGyro;
+  // Starts Gyro
+  public ADXRS450_Gyro onboardGyro  = new  ADXRS450_Gyro();
+  // Local Variables
   public boolean m_LimelightHasValidTarget = false;
-  public double m_LimelightDriveCommand = 0.0;
-  public double m_LimelightSteerCommand = 0.0;
+  public double m_LimelightDriveCommand    = 0.0;
+  public double m_LimelightSteerCommand    = 0.0;
   public boolean ledStatus = true;
 
   public DriveTrain_Subsystem() {
 
     // Configure Left GB Motors
-    leftMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY);
-    leftMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs);
-    leftMasterMotor.config_kI(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kI, PIDConstants.kTimeoutMs);
-    leftMasterMotor.config_kD(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kD, PIDConstants.kTimeoutMs);
-    leftMasterMotor.config_kF(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kF, PIDConstants.kTimeoutMs);
-    leftMasterMotor.configMotionAcceleration(PIDConstants.kDriveTrainAccel, PIDConstants.kTimeoutMs);
-    leftMasterMotor.configMotionCruiseVelocity(PIDConstants.kDriveTrainVelocity, PIDConstants.kTimeoutMs);
-    leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs);
-    leftMasterMotor.setSensorPhase(true);
-    leftMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs);
-    leftMasterMotor.setNeutralMode(NeutralMode.Coast);
-    leftSlaveMotor1.setNeutralMode(NeutralMode.Coast);
-    leftSlaveMotor2.setNeutralMode(NeutralMode.Coast);
+    leftMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY); // Profile Slot for PID Values
+    leftMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs); // P Value
+    leftMasterMotor.config_kI(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kI, PIDConstants.kTimeoutMs); // I Value
+    leftMasterMotor.config_kD(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kD, PIDConstants.kTimeoutMs); // D Value
+    leftMasterMotor.config_kF(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kF, PIDConstants.kTimeoutMs); // F Value
+    leftMasterMotor.configMotionAcceleration(PIDConstants.kDriveTrainAccel, PIDConstants.kTimeoutMs); // Motion Magic Acceleration Value
+    leftMasterMotor.configMotionCruiseVelocity(PIDConstants.kDriveTrainVelocity, PIDConstants.kTimeoutMs); // Motion Magic Velocity Value
+    leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs); // Select Sensor (Encoder)
+    leftMasterMotor.setSensorPhase(true); // Reverse Direction of encoder
+    leftMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs); // % Ramp - 1 sec to full throtle
+    leftMasterMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+    leftSlaveMotor1.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+    leftSlaveMotor2.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
 
     // Configure Right GB Motors
-    rightMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY);
-    rightMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs);
-    rightMasterMotor.config_kI(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kI, PIDConstants.kTimeoutMs);
-    rightMasterMotor.config_kD(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kD, PIDConstants.kTimeoutMs);
-    rightMasterMotor.config_kF(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kF, PIDConstants.kTimeoutMs);
-    rightMasterMotor.configMotionAcceleration(PIDConstants.kDriveTrainAccel, PIDConstants.kTimeoutMs);
-    rightMasterMotor.configMotionCruiseVelocity(PIDConstants.kDriveTrainVelocity, PIDConstants.kTimeoutMs);
-    rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs);
-    rightMasterMotor.setSensorPhase(false);
-    rightMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs);
-    rightMasterMotor.setNeutralMode(NeutralMode.Coast);
-    rightSlaveMotor1.setNeutralMode(NeutralMode.Coast);
-    rightSlaveMotor2.setNeutralMode(NeutralMode.Coast);
+    rightMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY); // Profile Slot for PID Values
+    rightMasterMotor.config_kP(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kP, PIDConstants.kTimeoutMs); // P Value
+    rightMasterMotor.config_kI(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kI, PIDConstants.kTimeoutMs); // I Value
+    rightMasterMotor.config_kD(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kD, PIDConstants.kTimeoutMs); // D Value
+    rightMasterMotor.config_kF(PIDConstants.kSlot_Drive, PIDConstants.kGains_Drive.kF, PIDConstants.kTimeoutMs); // F Value
+    rightMasterMotor.configMotionAcceleration(PIDConstants.kDriveTrainAccel, PIDConstants.kTimeoutMs); // Motion Magic Acceleration Value
+    rightMasterMotor.configMotionCruiseVelocity(PIDConstants.kDriveTrainVelocity, PIDConstants.kTimeoutMs); // Motion Magic Velocity Value
+    rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, PIDConstants.PID_PRIMARY, PIDConstants.kTimeoutMs);// Select Sensor (Encoder)
+    rightMasterMotor.setSensorPhase(false); // !Reverse Direction of encoder
+    rightMasterMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs); // % Ramp - 1 sec to full throtle
+    rightMasterMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+    rightSlaveMotor1.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+    rightSlaveMotor2.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
 
-    onboardGyro = new  ADXRS450_Gyro();
+    // Calibrates and Resets Gyro
     onboardGyro.calibrate(); // Calibrates the gyro
     onboardGyro.reset();     // Sets gyro to 0 degrees
 
@@ -84,12 +83,14 @@ public class DriveTrain_Subsystem extends Subsystem {
     setDefaultCommand(new Drive());
   }
 
+  // Set Left Motors Speed (%)
   public void setLeftMotors(double speed) {
     leftMasterMotor.set(ControlMode.PercentOutput, -speed);
     leftSlaveMotor1.follow(leftMasterMotor);
     leftSlaveMotor2.follow(leftMasterMotor);
   }
 
+  // Set Right Motors Speed (%)
   public void setRightMotors(double speed) {
     rightMasterMotor.set(ControlMode.PercentOutput, speed);
     rightSlaveMotor1.follow(rightMasterMotor);
@@ -124,11 +125,11 @@ public class DriveTrain_Subsystem extends Subsystem {
 
   /**
    * 
-   * @param angle Angle to Drive Straight to
-   * @param direction Direction to Drive Straight. 1.0 is Forward, -1.0 is backwards
+   * @param angle Angle to drive straight to
+   * @param direction Direction to drive straight; 1.0 is Forward, -1.0 is backwards
    *  
    */
-  public void driveStraight(int angle, double direction){
+  public void driveStraight(double angle, double direction){
     double currentAngle = onboardGyro.getAngle();
     double targetAngle = angle;
     double maxSpeed = direction * 0.75;
@@ -136,9 +137,13 @@ public class DriveTrain_Subsystem extends Subsystem {
     double kI = 0.0;
     double kD = 0.0;
     double integral = 0;
+    double derivative = 0;
+    double previousError = 0;
     double error = targetAngle - currentAngle;
     integral = integral + (error*0.02);
-    double turnCommand = (error * kP) + (integral * kI);
+    derivative = ((error - previousError)/0.02);
+    double turnCommand = (error * kP) + (integral * kI) + (derivative * kD);
+    previousError = error;
     leftMasterMotor.set(ControlMode.PercentOutput, (maxSpeed - turnCommand));
     leftSlaveMotor1.follow(leftMasterMotor);
     leftSlaveMotor2.follow(leftMasterMotor);
@@ -196,8 +201,8 @@ public class DriveTrain_Subsystem extends Subsystem {
     m_LimelightDriveCommand = drive_cmd;
   }
 
-  public void toggleGreenLEDS(){
-    // turn on/off Vision Tracking
+  // Turn on/off Vision Tracking + LED's
+  public void toggleVision(){
     if(ledStatus){ //turn off
       NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
       NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
