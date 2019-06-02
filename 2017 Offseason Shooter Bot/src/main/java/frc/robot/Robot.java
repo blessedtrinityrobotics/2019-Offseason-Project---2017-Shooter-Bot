@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain_Subsystem;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 
@@ -26,10 +27,11 @@ import frc.robot.subsystems.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveTrain_Subsystem driveTrain = new DriveTrain_Subsystem();
-  public static Hopper hopper = new Hopper();
-  public static Intake intake = new Intake();
-  public static Shooter shooter = new Shooter();
+  public static DriveTrain_Subsystem driveTrain  = new DriveTrain_Subsystem();
+  public static Hopper hopper                    = new Hopper();
+  public static Intake intake                    = new Intake();
+  public static Shooter shooter                  = new Shooter();
+  public static Limelight limelight              = new Limelight();
   public static OI m_oi;
 
   Command m_autonomousCommand;

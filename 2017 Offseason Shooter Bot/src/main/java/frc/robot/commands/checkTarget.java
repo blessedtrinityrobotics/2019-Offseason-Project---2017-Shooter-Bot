@@ -10,9 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ToggleVision extends Command {
-  boolean toggle = true;
-  public ToggleVision() {
+public class checkTarget extends Command {
+  public checkTarget() {
     requires(Robot.limelight);
   }
 
@@ -24,30 +23,24 @@ public class ToggleVision extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.limelight.toggleVision();
+    Robot.limelight.checkTarget();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (!(Robot.limelight.ledStatus == toggle)) {
-      toggle = !toggle;
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    cancel();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    this.end();
   }
 }
+

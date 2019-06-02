@@ -18,7 +18,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 
 
@@ -34,11 +33,7 @@ public class DriveTrain_Subsystem extends Subsystem {
   public VictorSPX rightSlaveMotor2 = new VictorSPX(RobotMap.rightSlaveMotor2Port);
   // Starts Gyro
   public ADXRS450_Gyro onboardGyro  = new  ADXRS450_Gyro();
-  // Local Variables
-  public boolean m_LimelightHasValidTarget = false;
-  public double m_LimelightDriveCommand    = 0.0;
-  public double m_LimelightSteerCommand    = 0.0;
-  public boolean ledStatus = true;
+  
 
   public DriveTrain_Subsystem() {
 
@@ -152,66 +147,6 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightSlaveMotor2.follow(rightMasterMotor);
   }
    
-  /**
-   * This function implements a simple method of generating driving and steering commands
-   * based on the tracking data from a limelight camera.
-   */
-  public void Update_Limelight_Tracking() {
-    final double STEER_P = 0.0;                     // how hard to turn toward the target
-    final double DRIVE_P = 0.0;                     // how hard to drive fwd toward the target
-    final double DESIRED_TARGET_AREA = 0.0;         // Area of the target when the robot reaches the wall
-    final double MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
-    final double STEER_I = 0.0;
-    final double DRIVE_I = 0.0;
-    final double xError;
-    final double aError;
-    double STEER_INTEGRAL = 0;
-    double DRIVE_INTEGRAL = 0;
-
-    double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-    double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-    xError = tx;
-    aError = DESIRED_TARGET_AREA - ta;
-    STEER_INTEGRAL = STEER_INTEGRAL + (xError*0.02);
-    DRIVE_INTEGRAL = DRIVE_INTEGRAL + (aError * 0.02);
-
-    if (tv < 1.0)
-    {
-      m_LimelightHasValidTarget = false;
-      m_LimelightDriveCommand = 0.0;
-      m_LimelightSteerCommand = 0.0;
-      return;
-    }
-
-    m_LimelightHasValidTarget = true;
-
-    // Start with proportional steering
-    double steer_cmd = (tx * STEER_P) + (STEER_INTEGRAL * STEER_I);
-    m_LimelightSteerCommand = steer_cmd;
-
-    // try to drive forward until the target area reaches our desired area
-    double drive_cmd = (aError * DRIVE_P) + (DRIVE_INTEGRAL * DRIVE_I);
-
-    // don't let the robot drive too fast into the goal
-    if (drive_cmd > MAX_DRIVE)
-    {
-      drive_cmd = MAX_DRIVE;
-    }
-    m_LimelightDriveCommand = drive_cmd;
-  }
-
-  // Turn on/off Vision Tracking + LED's
-  public void toggleVision(){
-    if(ledStatus){ //turn off
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
-      ledStatus = false;
-    } else { //turn on
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
-      ledStatus = true;
-    }
-  }
+  
 
 }
