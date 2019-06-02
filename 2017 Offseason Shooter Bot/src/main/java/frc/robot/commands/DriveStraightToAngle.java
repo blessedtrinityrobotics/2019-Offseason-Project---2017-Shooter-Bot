@@ -47,7 +47,5 @@ public class DriveStraightToAngle extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.driveTrain.setLeftMotors(0);
-    Robot.driveTrain.setRightMotors(0);
   }
 }
