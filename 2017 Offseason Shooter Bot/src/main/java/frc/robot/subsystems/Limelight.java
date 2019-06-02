@@ -8,8 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.commands.checkTarget;
+import frc.robot.commands.CheckTarget;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -28,7 +29,7 @@ public class Limelight extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new checkTarget());
+    setDefaultCommand(new CheckTarget());
   }
   
   /**
@@ -85,8 +86,10 @@ public class Limelight extends Subsystem {
   public boolean checkTarget(){
     double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
     if (tv < 1.0) {
+      SmartDashboard.putBoolean("Valid Vision Target", false);
       return false;
     } else {
+      SmartDashboard.putBoolean("Valid Vision Target", true);
       return true;
     }
   }
