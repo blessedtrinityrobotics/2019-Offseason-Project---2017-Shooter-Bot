@@ -44,5 +44,10 @@ public class Hopper extends Subsystem {
     frontHopperMotor.set(ControlMode.PercentOutput, speed);
     backHopperMotor.set(ControlMode.PercentOutput, speed);
   }
+
+  // Set Bottom Rollers Speed
+  public void setBottomHopperSpeed(double speed) {
+    frontHopperMotor.set(ControlMode.PercentOutput, speed);
+  }
   
 }

@@ -9,13 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class VisionApproach extends Command {
-  double waitTime;
-  public VisionApproach(double time) {
-    waitTime = time;
-    requires(Robot.limelight);
-    requires(Robot.driveTrain);
+public class RunBottomHopper extends Command {
+  public RunBottomHopper() {
+    requires(Robot.hopper);
+
   }
 
   // Called just before this Command runs the first time
@@ -26,31 +25,25 @@ public class VisionApproach extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.limelight.ledStatus == false){
-      Robot.limelight.toggleVision();
-    }
-    Robot.limelight.approachTargetWithVision();
+    Robot.hopper.setBottomHopperSpeed(RobotMap.HopperSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if((Robot.driveTrain.getAvgSpeed() == 0) && ( (Robot.driveTrain.getAvgGyroAngle(waitTime) >= (Robot.driveTrain.initGyroAngle - 0.5)) && (Robot.driveTrain.getAvgGyroAngle(waitTime) <= (Robot.driveTrain.finalGyroAngle + 0.5)) ) ){
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
+    Robot.hopper.setBottomHopperSpeed(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    this.end();
   }
 }

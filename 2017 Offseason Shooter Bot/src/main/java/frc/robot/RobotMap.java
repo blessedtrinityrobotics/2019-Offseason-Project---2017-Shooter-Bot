@@ -48,6 +48,7 @@ public class RobotMap {
     public static final double RPM          = 4000; // Shooter Speed (RPM)
     public static final double HopperSpeed  = 0.75; // Hopper Speed (Volts)
     public static final double IntakeSpeed  = 1.0;  // Intake Speed (Volts)
+    public static final double waitTime     = 1.0;  // Time to wait before grabing final gyro angle for vision approach
   //End of Constants
 
   //Axis

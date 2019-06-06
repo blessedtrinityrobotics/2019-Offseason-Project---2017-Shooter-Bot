@@ -18,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Timer;
 
 
 
@@ -33,7 +34,8 @@ public class DriveTrain_Subsystem extends Subsystem {
   public VictorSPX rightSlaveMotor2 = new VictorSPX(RobotMap.rightSlaveMotor2Port);
   // Starts Gyro
   public ADXRS450_Gyro onboardGyro  = new  ADXRS450_Gyro();
-  
+  public double initGyroAngle;
+  public double finalGyroAngle;
 
   public DriveTrain_Subsystem() {
 
@@ -78,14 +80,22 @@ public class DriveTrain_Subsystem extends Subsystem {
     setDefaultCommand(new Drive());
   }
 
-  // Set Left Motors Speed (%)
+  /**
+   * 
+   * @param speed Set Left Motors Speed (%)
+   * 
+   */ 
   public void setLeftMotors(double speed) {
     leftMasterMotor.set(ControlMode.PercentOutput, -speed);
     leftSlaveMotor1.follow(leftMasterMotor);
     leftSlaveMotor2.follow(leftMasterMotor);
   }
 
-  // Set Right Motors Speed (%)
+  /**
+   * 
+   * @param speed Set Right Motors Speed (%)
+   * 
+   */
   public void setRightMotors(double speed) {
     rightMasterMotor.set(ControlMode.PercentOutput, speed);
     rightSlaveMotor1.follow(rightMasterMotor);
@@ -108,14 +118,52 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightSlaveMotor2.follow(rightMasterMotor);
   }
 
-  // Get Averaged Current Position of Drive Train
+  /**
+   * 
+   * @return Averaged Current Position of Drive Train
+   * 
+   */
   public double getAvgCurrentPosition(){
     return ((leftMasterMotor.getSelectedSensorPosition() + rightMasterMotor.getSelectedSensorPosition())/2);
+  }
+
+  /**
+   * 
+   * @return Averaged Speed from the two sides
+   * 
+   */
+  public double getAvgSpeed(){
+    return ((leftMasterMotor.getBusVoltage() + rightMasterMotor.getBusVoltage())/2);
   }
 
   // Sets gyro to 0 degrees
   public void resetGyro(){
     onboardGyro.reset();     
+  }
+
+  
+  /**
+   * 
+   * @return Gyro angle
+   * 
+   */
+  public double getGyroAngle(){
+    return onboardGyro.getAngle();
+  }
+
+  
+  /**
+   * 
+   * @param time Seconds to wait before grabing final gyro angle
+   * @return Averaged Gyro Angle b/w two time periods
+   * 
+   */ 
+  public double getAvgGyroAngle(double time){
+    double interval = time;
+    initGyroAngle = onboardGyro.getAngle();
+    Timer.delay(interval);
+    finalGyroAngle = onboardGyro.getAngle();
+    return ((finalGyroAngle-initGyroAngle)/2);
   }
 
   /**

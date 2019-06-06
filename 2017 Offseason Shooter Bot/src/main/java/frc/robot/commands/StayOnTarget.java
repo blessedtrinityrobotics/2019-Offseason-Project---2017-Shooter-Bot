@@ -10,10 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class VisionApproach extends Command {
-  double waitTime;
-  public VisionApproach(double time) {
-    waitTime = time;
+public class StayOnTarget extends Command {
+  public StayOnTarget() {
     requires(Robot.limelight);
     requires(Robot.driveTrain);
   }
@@ -35,17 +33,12 @@ public class VisionApproach extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if((Robot.driveTrain.getAvgSpeed() == 0) && ( (Robot.driveTrain.getAvgGyroAngle(waitTime) >= (Robot.driveTrain.initGyroAngle - 0.5)) && (Robot.driveTrain.getAvgGyroAngle(waitTime) <= (Robot.driveTrain.finalGyroAngle + 0.5)) ) ){
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
   }
 
   // Called when another command which requires one or more of the same
