@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -59,6 +60,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    double time = Timer.getMatchTime();
+    SmartDashboard.putNumber("Timer",  time);
+
   }
 
   /**
@@ -128,6 +132,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    
+    // Smart Dashboard Statements
+    SmartDashboard.putNumber("Left Drivetrain Encoder", Robot.driveTrain.leftMasterMotor.getSelectedSensorPosition());   // Left Drive Train Encoder Position
+    SmartDashboard.putNumber("Right Drivetrain Encoder", Robot.driveTrain.rightMasterMotor.getSelectedSensorPosition()); // Right Drive Train Encoder Position
+    SmartDashboard.putNumber("Shooter Velocity", Robot.shooter.shooterMasterMotor.getSelectedSensorPosition());          // Shooter Encoder Velocity
+
   }
 
   /**
