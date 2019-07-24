@@ -17,22 +17,22 @@ public class RobotMap {
   
   // Motor Ports
     // Left Drive Train GB Motors
-    public static final int  leftMasterMotorPort     = 2;
-    public static final int  leftSlaveMotor1Port     = 3;
-    public static final int  leftSlaveMotor2Port     = 4;
+    public static final int  leftMasterMotorPort     = 3;
+    public static final int  leftSlaveMotor1Port     = 4;
+    public static final int  leftSlaveMotor2Port     = 8;
     // Right Drive Train GB Motors
-    public static final int  rightMasterMotorPort    = 5;
-    public static final int  rightSlaveMotor1Port    = 6;
-    public static final int  rightSlaveMotor2Port    = 7;
+    public static final int  rightMasterMotorPort    = 1;
+    public static final int  rightSlaveMotor1Port    = 5;
+    public static final int  rightSlaveMotor2Port    = 6;
     // Intake Motors
-    public static final int  leftIntakeMotorPort     = 8;
-    public static final int  rightIntakeMotorPort    = 9;
+    public static final int  leftIntakeMotorPort     = 0;
+    public static final int  rightIntakeMotorPort    = 1;
     // Hopper Motors
-    public static final int  frontHopperMotorPort    = 10;
+    public static final int  frontHopperMotorPort    = 3;
     public static final int  backHopperMotorPort     = 11;
     // Shooter Motors
-    public static final int  shooterMasterMotorPort  = 12;
-    public static final int  shooterSlaveMotorPort   = 13;
+    public static final int  shooterMasterMotorPort  = 2;
+    public static final int  shooterSlaveMotorPort   = 7;
   //End of Motor Ports
 
   // XboxController Ports
