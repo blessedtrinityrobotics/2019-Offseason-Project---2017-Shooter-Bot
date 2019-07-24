@@ -27,7 +27,7 @@ public class Drive extends Command {
     //Get All Axis Values
     //double leftStickY = Robot.m_oi.getDriverRawAxis(RobotMap.leftStickY);
     double rightStickY = Robot.m_oi.getDriverRawAxis(RobotMap.rightStickY);
-    double leftStickX = Robot.m_oi.getDriverRawAxis(RobotMap.leftStickX);
+    double leftStickX = -Robot.m_oi.getDriverRawAxis(RobotMap.leftStickX);
     //double rightStickX = Robot.m_oi.getDriverRawAxis(RobotMap.rightStickX);
     //double leftTrigger = Robot.m_oi.getDriverRawAxis(RobotMap.leftTriggerAxis);
     //double rightTrigger = Robot.m_oi.getDriverRawAxis(RobotMap.rightTriggerAxis);

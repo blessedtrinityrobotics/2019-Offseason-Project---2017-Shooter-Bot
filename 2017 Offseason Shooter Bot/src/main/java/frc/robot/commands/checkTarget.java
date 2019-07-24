@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CheckTarget extends Command {
-  public CheckTarget() {
+public class checkTarget extends Command {
+  public checkTarget() {
     requires(Robot.limelight);
   }
 

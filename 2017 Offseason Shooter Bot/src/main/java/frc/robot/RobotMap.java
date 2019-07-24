@@ -26,10 +26,10 @@ public class RobotMap {
     public static final int  rightSlaveMotor2Port    = 6;
     // Intake Motors
     public static final int  leftIntakeMotorPort     = 0;
-    public static final int  rightIntakeMotorPort    = 1;
+    public static final int  rightIntakeMotorPort    = 3;
     // Hopper Motors
-    public static final int  frontHopperMotorPort    = 3;
-    public static final int  backHopperMotorPort     = 11;
+    public static final int  frontHopperMotorPort    = 1;
+    public static final int  backHopperMotorPort     = 2;
     // Shooter Motors
     public static final int  shooterMasterMotorPort  = 2;
     public static final int  shooterSlaveMotorPort   = 7;

@@ -66,17 +66,17 @@ public class OI {
   public OI() {
 
     // Starts Commands
-    xButtonDriver.whenPressed(new MoveToPos( 10)); // Moves 10 inches forwards
-    aButtonDriver.whenPressed(new MoveToPos(-10)); // Moves 10 inches backwards
+    //xButtonDriver.whenPressed(new MoveToPos( 10)); // Moves 10 inches forwards
+    //aButtonDriver.whenPressed(new MoveToPos(-10)); // Moves 10 inches backwards
     leftBumperButtonDriver.whenPressed(new ResetGyro());   // Reset Gyro to 0
-    leftBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, 1.0)); // Drive Straight using PID Control
+    //leftBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, 1.0)); // Drive Straight using PID Control
     rightBumperButtonDriver.whenPressed(new ResetGyro());   // Reset Gyro to 0
-    rightBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, -1.0)); // Drive Backwards using PID Control
+    //rightBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, -1.0)); // Drive Backwards using PID Control
     startButtonDriver.whenReleased(new ToggleVision());
     
     leftBumperButtonOperator.whileHeld(new IntakeBalls()); // Intake Balls
     rightBumperButtonOperator.whileHeld(new FeedBalls());  // Feed Balls
-    xButtonOperator.whileHeld(new Shoot(RobotMap.RPM));
+    //xButtonOperator.whileHeld(new Shoot(RobotMap.RPM));
     
 
     

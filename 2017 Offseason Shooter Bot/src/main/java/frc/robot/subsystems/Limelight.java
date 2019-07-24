@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.commands.CheckTarget;
+import frc.robot.commands.checkTarget;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -29,7 +29,7 @@ public class Limelight extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new CheckTarget());
+    setDefaultCommand(new checkTarget());
   }
   
   /**
