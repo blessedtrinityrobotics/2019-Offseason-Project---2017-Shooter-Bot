@@ -10,12 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.MoveToPos;
+//import frc.robot.commands.MoveToPos;
 import frc.robot.commands.IntakeBalls;
 import frc.robot.commands.FeedBalls;
-import frc.robot.commands.Shoot;
-import frc.robot.commands.DriveStraightToAngle;
+//import frc.robot.commands.Shoot;
+//import frc.robot.commands.DriveStraightToAngle;
 import frc.robot.commands.ResetGyro;
+import frc.robot.commands.ShooterManual;
 import frc.robot.commands.ToggleVision;
 
 
@@ -77,8 +78,7 @@ public class OI {
     leftBumperButtonOperator.whileHeld(new IntakeBalls()); // Intake Balls
     rightBumperButtonOperator.whileHeld(new FeedBalls());  // Feed Balls
     //xButtonOperator.whileHeld(new Shoot(RobotMap.RPM));
-    
-
+    aButtonOperator.whileHeld(new ShooterManual());
     
     /*
     // Cancels Commands

@@ -44,7 +44,7 @@ public class Shooter extends Subsystem {
     shooterMasterMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
  
     // Configure Slave Shooter Motor
-    shooterSlaveMotor.setInverted(false); // !Reverse Direction of Motor
+    shooterSlaveMotor.setInverted(true); // !Reverse Direction of Motor
     shooterSlaveMotor.configOpenloopRamp(1, PIDConstants.kTimeoutMs); // % Ramp - 1 sec to full throtle
     shooterSlaveMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
  
@@ -53,7 +53,7 @@ public class Shooter extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new Shoot(RobotMap.RPM));
+    //setDefaultCommand(new Shoot(RobotMap.RPM));
   }
 
   // Set Shooter Motors Speed

@@ -7,14 +7,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.IntakeBalls;
 
-
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  * Add your docs here.
@@ -22,27 +19,25 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class Intake extends Subsystem {
    
   // Starts Intake Motors
-  public VictorSPX leftIntakeMotor = new VictorSPX(RobotMap.leftIntakeMotorPort);
-  public VictorSPX rightIntakeMotor = new VictorSPX(RobotMap.rightIntakeMotorPort);
+  public VictorSP leftIntakeMotor = new VictorSP(RobotMap.leftIntakeMotorPort);
+  public VictorSP rightIntakeMotor = new VictorSP(RobotMap.rightIntakeMotorPort);
   
   public Intake() {
     // Configure Intake Motors
     leftIntakeMotor.setInverted(true); // Reverse direction
-    leftIntakeMotor.setNeutralMode(NeutralMode.Brake); // Neutral Mode - Brake
     rightIntakeMotor.setInverted(false); // !Reverse direction
-    rightIntakeMotor.setNeutralMode(NeutralMode.Brake); // Neutral Mode - Brake
   } 
   
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new IntakeBalls());
+    //setDefaultCommand(new IntakeBalls());
   }
   
   // Set Intake Motors Speed
   public void setIntakeSpeed(double speed) {
-    leftIntakeMotor.set(ControlMode.PercentOutput, speed);
-    rightIntakeMotor.set(ControlMode.PercentOutput, speed);
+    leftIntakeMotor.set(speed);
+    rightIntakeMotor.set(speed);
   }
   
 }

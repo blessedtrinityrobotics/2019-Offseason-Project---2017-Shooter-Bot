@@ -7,14 +7,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.FeedBalls;
 
-
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /**
  * Add your docs here.
@@ -22,32 +19,30 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class Hopper extends Subsystem {
   
   // Starts Hopper Motors
-  public VictorSPX frontHopperMotor = new VictorSPX(RobotMap.frontHopperMotorPort);
-  public VictorSPX backHopperMotor = new VictorSPX(RobotMap.backHopperMotorPort);
+  public VictorSP frontHopperMotor = new VictorSP(RobotMap.frontHopperMotorPort);
+  public VictorSP backHopperMotor = new VictorSP(RobotMap.backHopperMotorPort);
   
   public Hopper() {
     // Configure Hopper Motors
     frontHopperMotor.setInverted(true); // Reverse direction
-    frontHopperMotor.setNeutralMode(NeutralMode.Brake); // Neutral Mode - Brake
     backHopperMotor.setInverted(false); // !Reverse direction 
-    backHopperMotor.setNeutralMode(NeutralMode.Brake); // Neutral Mode - Brake
   }
   
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new FeedBalls());
+    //setDefaultCommand(new FeedBalls());
   }
   
   // Set Hopper Motors Speed
   public void setHopperSpeed(double speed) {
-    frontHopperMotor.set(ControlMode.PercentOutput, speed);
-    backHopperMotor.set(ControlMode.PercentOutput, speed);
+    frontHopperMotor.set(speed);
+    backHopperMotor.set(speed);
   }
 
   // Set Bottom Rollers Speed
   public void setBottomHopperSpeed(double speed) {
-    frontHopperMotor.set(ControlMode.PercentOutput, speed);
+    frontHopperMotor.set(speed);
   }
   
 }

@@ -46,8 +46,8 @@ public class RobotMap {
     public static final double PPI          = (PPR)/(2*Math.PI*(wheelDiameter/2)); // Pulse Per Inch
     public static final double turningPower = 0.5;  // Turning Power for Drive (%)
     public static final double RPM          = 4000; // Shooter Speed (RPM)
-    public static final double HopperSpeed  = 0.75; // Hopper Speed (Volts)
-    public static final double IntakeSpeed  = 1.0;  // Intake Speed (Volts)
+    public static final double HopperSpeed  = 0.5; // Hopper Speed (Volts)
+    public static final double IntakeSpeed  = 0.5;  // Intake Speed (Volts)
     public static final double waitTime     = 1.0;  // Time to wait before grabing final gyro angle for vision approach
   //End of Constants
 
