@@ -18,6 +18,7 @@ import frc.robot.commands.FeedBalls;
 import frc.robot.commands.ResetGyro;
 import frc.robot.commands.ShooterManual;
 import frc.robot.commands.ToggleVision;
+import frc.robot.commands.VisionApproach;
 
 
 
@@ -74,6 +75,7 @@ public class OI {
     rightBumperButtonDriver.whenPressed(new ResetGyro());   // Reset Gyro to 0
     //rightBumperButtonDriver.whileHeld(new DriveStraightToAngle(0, -1.0)); // Drive Backwards using PID Control
     startButtonDriver.whenReleased(new ToggleVision());
+    aButtonDriver.whileHeld(new VisionApproach());
     
     leftBumperButtonOperator.whileHeld(new IntakeBalls()); // Intake Balls
     rightBumperButtonOperator.whileHeld(new FeedBalls());  // Feed Balls

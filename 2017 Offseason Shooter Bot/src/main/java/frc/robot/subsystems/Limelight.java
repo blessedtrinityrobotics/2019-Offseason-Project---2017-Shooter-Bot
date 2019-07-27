@@ -37,9 +37,9 @@ public class Limelight extends Subsystem {
    * based on the tracking data from a limelight camera.
   */
   public void approachTargetWithVision() {
-    final double STEER_P = 0.0;                     // how hard to turn toward the target
-    final double DRIVE_P = 0.0;                     // how hard to drive fwd toward the target
-    final double DESIRED_TARGET_AREA = 0.0;         // Area of the target when the robot reaches the wall
+    final double STEER_P = 0.075;                     // how hard to turn toward the target
+    final double DRIVE_P = 0.2;                     // how hard to drive fwd toward the target
+    final double DESIRED_TARGET_AREA = 2.0;         // Area of the target when the robot reaches the wall
     final double MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
     final double STEER_I = 0.0;
     final double DRIVE_I = 0.0;
@@ -52,7 +52,10 @@ public class Limelight extends Subsystem {
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
     xError = tx;
-    aError = DESIRED_TARGET_AREA - ta;
+    aError = (DESIRED_TARGET_AREA - ta);
+    SmartDashboard.putNumber("TA", ta);
+    SmartDashboard.putNumber("TA Error", aError);
+    SmartDashboard.putNumber("TX Error", xError);
     STEER_INTEGRAL = STEER_INTEGRAL + (xError*0.02);
     DRIVE_INTEGRAL = DRIVE_INTEGRAL + (aError * 0.02);
 
@@ -63,7 +66,7 @@ public class Limelight extends Subsystem {
     } else {
       m_LimelightHasValidTarget = true;
       // Start with proportional steering
-      steer_cmd = (tx * STEER_P) + (STEER_INTEGRAL * STEER_I);
+      steer_cmd = (xError * STEER_P) + (STEER_INTEGRAL * STEER_I);
 
       // try to drive forward until the target area reaches our desired area
       drive_cmd = (aError * DRIVE_P) + (DRIVE_INTEGRAL * DRIVE_I);
@@ -73,10 +76,10 @@ public class Limelight extends Subsystem {
       }
     }
 
-    Robot.driveTrain.leftMasterMotor.set(ControlMode.PercentOutput, (drive_cmd - steer_cmd));
+    Robot.driveTrain.leftMasterMotor.set(ControlMode.PercentOutput, (drive_cmd + steer_cmd));
     Robot.driveTrain.leftSlaveMotor1.follow(Robot.driveTrain.leftMasterMotor);
     Robot.driveTrain.leftSlaveMotor2.follow(Robot.driveTrain.leftMasterMotor);
-    Robot.driveTrain.rightMasterMotor.set(ControlMode.PercentOutput, -(drive_cmd + steer_cmd));
+    Robot.driveTrain.rightMasterMotor.set(ControlMode.PercentOutput, (-drive_cmd - steer_cmd));
     Robot.driveTrain.rightSlaveMotor1.follow(Robot.driveTrain.rightMasterMotor);
     Robot.driveTrain.rightSlaveMotor2.follow(Robot.driveTrain.rightMasterMotor);
 

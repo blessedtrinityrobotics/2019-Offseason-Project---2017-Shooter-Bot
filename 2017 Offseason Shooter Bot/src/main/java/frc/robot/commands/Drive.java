@@ -43,8 +43,8 @@ public class Drive extends Command {
   */
     // Split Arcade Drive Options  
       // Regular Split Arcade
-      Robot.driveTrain.setLeftMotors(rightStickY + leftStickX * RobotMap.turningPower);
-      Robot.driveTrain.setRightMotors(rightStickY - leftStickX * RobotMap.turningPower);
+      Robot.driveTrain.setLeftMotors(rightStickY + ((leftStickX * Math.abs(leftStickX)) * RobotMap.turningPower));
+      Robot.driveTrain.setRightMotors(rightStickY - ((leftStickX * Math.abs(leftStickX)) * RobotMap.turningPower));
     /*
       // Exponential Drive Split Arcade
       Robot.driveTrain.setLeftMotors((rightStickY * Math.abs(rightStickY)) + (leftStickX * RobotMap.turningPower));

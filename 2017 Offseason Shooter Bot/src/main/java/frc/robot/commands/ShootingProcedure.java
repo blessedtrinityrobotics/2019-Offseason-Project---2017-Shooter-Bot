@@ -14,7 +14,7 @@ public class ShootingProcedure extends CommandGroup {
   
   public ShootingProcedure() {
     //Sequential Commands
-    addSequential(new VisionApproach(RobotMap.waitTime)); // Approaches Target if it has not done so already
+    addSequential(new VisionApproach(/* RobotMap.waitTime */)); // Approaches Target if it has not done so already
     // Parallel Commands
     addParallel(new StayOnTarget());      // Stays locked onto the target  
     addParallel(new IntakeBalls());       // Intake Runs to feed balls into hopper
