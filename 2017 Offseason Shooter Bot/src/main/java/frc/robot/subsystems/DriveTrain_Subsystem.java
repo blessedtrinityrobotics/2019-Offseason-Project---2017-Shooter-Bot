@@ -53,6 +53,9 @@ public class DriveTrain_Subsystem extends Subsystem {
     leftMasterMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
     leftSlaveMotor1.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
     leftSlaveMotor2.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+    leftMasterMotor.setInverted(true);
+    leftSlaveMotor1.setInverted(true);
+    leftSlaveMotor2.setInverted(true);
 
     // Configure Right GB Motors
     rightMasterMotor.selectProfileSlot(PIDConstants.kSlot_Drive, PIDConstants.PID_PRIMARY); // Profile Slot for PID Values
@@ -68,6 +71,10 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightMasterMotor.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
     rightSlaveMotor1.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
     rightSlaveMotor2.setNeutralMode(NeutralMode.Coast); // Neutral Mode - Coast
+    rightMasterMotor.setInverted(false);
+    rightSlaveMotor1.setInverted(false);
+    rightSlaveMotor2.setInverted(false);
+
 
     // Calibrates and Resets Gyro
     onboardGyro.calibrate(); // Calibrates the gyro
@@ -86,7 +93,7 @@ public class DriveTrain_Subsystem extends Subsystem {
    * 
    */ 
   public void setLeftMotors(double speed) {
-    leftMasterMotor.set(ControlMode.PercentOutput, -speed);
+    leftMasterMotor.set(ControlMode.PercentOutput, speed);
     leftSlaveMotor1.follow(leftMasterMotor);
     leftSlaveMotor2.follow(leftMasterMotor);
   }
@@ -190,7 +197,7 @@ public class DriveTrain_Subsystem extends Subsystem {
     leftMasterMotor.set(ControlMode.PercentOutput, (maxSpeed - turnCommand));
     leftSlaveMotor1.follow(leftMasterMotor);
     leftSlaveMotor2.follow(leftMasterMotor);
-    rightMasterMotor.set(ControlMode.PercentOutput, -(maxSpeed + turnCommand));
+    rightMasterMotor.set(ControlMode.PercentOutput, (maxSpeed + turnCommand));
     rightSlaveMotor1.follow(rightMasterMotor);
     rightSlaveMotor2.follow(rightMasterMotor);
   }
