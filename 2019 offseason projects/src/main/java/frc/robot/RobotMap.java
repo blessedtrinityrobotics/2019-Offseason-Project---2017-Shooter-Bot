@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -34,6 +36,10 @@ public class RobotMap {
     public static final int  shooterMasterMotorPort  = 2;
     public static final int  shooterSlaveMotorPort   = 7;
   //End of Motor Ports
+
+  // Pigeon IMU
+    public static final int pigeonIMUPort = 1;
+  //End of Pigeon IMU
 
   // XboxController Ports
     public static final int driveControllerPort      = 0;

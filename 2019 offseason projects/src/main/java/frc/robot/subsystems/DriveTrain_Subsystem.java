@@ -17,8 +17,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Timer;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 
 
@@ -33,9 +33,10 @@ public class DriveTrain_Subsystem extends Subsystem {
   public VictorSPX rightSlaveMotor1 = new VictorSPX(RobotMap.rightSlaveMotor1Port);
   public VictorSPX rightSlaveMotor2 = new VictorSPX(RobotMap.rightSlaveMotor2Port);
   // Starts Gyro
-  public ADXRS450_Gyro onboardGyro  = new  ADXRS450_Gyro();
+  PigeonIMU gyro = new PigeonIMU(RobotMap.pigeonIMUPort);
   public double initGyroAngle;
   public double finalGyroAngle;
+  double [] ypr  = new double[3];
 
   public DriveTrain_Subsystem() {
 
@@ -75,10 +76,7 @@ public class DriveTrain_Subsystem extends Subsystem {
     rightSlaveMotor1.setInverted(false);
     rightSlaveMotor2.setInverted(false);
 
-
-    // Calibrates and Resets Gyro
-    onboardGyro.calibrate(); // Calibrates the gyro
-    onboardGyro.reset();     // Sets gyro to 0 degrees
+    
 
   }
   @Override
@@ -136,6 +134,19 @@ public class DriveTrain_Subsystem extends Subsystem {
 
   /**
    * 
+   * @param angle Angle to reset to
+   * 
+   */
+  public void resetYaw(double angle){
+
+    gyro.setYaw(angle);
+    gyro.setFusedHeading(angle);
+
+  }
+
+
+  /**
+   * 
    * @return Averaged Speed from the two sides
    * 
    */
@@ -143,35 +154,18 @@ public class DriveTrain_Subsystem extends Subsystem {
     return ((leftMasterMotor.getBusVoltage() + rightMasterMotor.getBusVoltage())/2);
   }
 
-  // Sets gyro to 0 degrees
-  public void resetGyro(){
-    onboardGyro.reset();     
-  }
 
-  
   /**
    * 
-   * @return Gyro angle
+   * @return Yaw heading on gyro
    * 
    */
-  public double getGyroAngle(){
-    return onboardGyro.getAngle();
+  public double getYaw(){
+    gyro.getYawPitchRoll(ypr);
+    return ypr[0];
   }
 
-  
-  /**
-   * 
-   * @param time Seconds to wait before grabing final gyro angle
-   * @return Averaged Gyro Angle b/w two time periods
-   * 
-   */ 
-  public double getAvgGyroAngle(double time){
-    double interval = time;
-    initGyroAngle = onboardGyro.getAngle();
-    Timer.delay(interval);
-    finalGyroAngle = onboardGyro.getAngle();
-    return ((finalGyroAngle-initGyroAngle)/2);
-  }
+
 
   /**
    * 
@@ -179,8 +173,13 @@ public class DriveTrain_Subsystem extends Subsystem {
    * @param direction Direction to drive straight; 1.0 is Forward, -1.0 is backwards
    *  
    */
-  public void driveStraight(double angle, double direction){
-    double currentAngle = onboardGyro.getAngle();
+  
+  public void driveToAngle(double angle, double direction){
+    gyro.getYawPitchRoll(ypr);
+    // Yaw = ypr[0]
+    // Pitch = ypr[1]
+    // Roll = ypr[2]
+    double currentAngle = ypr[0];
     double targetAngle = angle;
     double maxSpeed = direction * 0.75;
     double kP = 0.0;
